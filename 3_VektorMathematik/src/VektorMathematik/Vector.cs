@@ -23,7 +23,7 @@
         {
             return $"[ {x} | {y} | {z} ]";
         }
-
+         
         public static Vector operator +(Vector _v0, Vector _v1) //Sum
         {
             var xResult = _v0.x + _v1.x;

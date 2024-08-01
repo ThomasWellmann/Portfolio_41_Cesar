@@ -93,12 +93,12 @@
             while (true)
             {
                 var key = ReadKey(true);
-                if (key.Key == ConsoleKey.D1)
+                if (key.Key == ConsoleKey.D1) //Random vectors
                 {
                     vArr = [new Vector(NextFloat(), NextFloat(), NextFloat()), new Vector(NextFloat(), NextFloat(), NextFloat())];
                     break;
                 }
-                else if (key.Key == ConsoleKey.D2)
+                else if (key.Key == ConsoleKey.D2) //Vector input
                 {
                     Console.WriteLine();
                     vArr = GetNewVectors();
