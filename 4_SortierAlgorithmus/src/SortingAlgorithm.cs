@@ -14,82 +14,86 @@ namespace Sortier_Algorithmen
             list = _list;
         }
 
-        public void Sort(int _sortAlgorithm)
+        public void SortSequential()
         {
-            if (_sortAlgorithm == 1) //Sequential Sort
+            var swapped = true;
+            while (swapped)
             {
-                var swapped = true;
-                while (swapped)
+                swapped = false;
+                for (int i = 0; i <= list.Count - 2; i++)
                 {
-                    swapped = false;
-                    for (int i = 0; i <= list.Count - 2; i++)
+                    if (list[i] > list[i + 1])
                     {
-                        if (list[i] > list[i + 1])
-                        {
-                            var temp = list[i];
-                            list[i] = list[i + 1];
-                            list[i + 1] = temp;
+                        var temp = list[i];
+                        list[i] = list[i + 1];
+                        list[i + 1] = temp;
 
-                            swapped = true;
-                        }
+                        swapped = true;
                     }
-                }
-            }
-            else if (_sortAlgorithm == 2) //Bubble Sort
-            {
-                var swapped = false;
-                for (int i = 0; i < list.Count - 1; i++)
-                {
-                    for (int j = 0; j < list.Count - 1 - i; j++)
-                    {
-                        if (list[j] > list[j + 1])
-                        {
-                            var temp = list[j];
-                            list[j] = list[j + 1];
-                            list[j + 1] = temp;
-
-                            swapped = true;
-                        }
-                    }
-                    if (!swapped) break;
-                }
-            }
-            else if (_sortAlgorithm == 3) //Insertion Sort
-            {
-                var temp = 0;
-                var n = 0;
-                for (int i = 1; i < list.Count; ++i)
-                {
-                    n = i - 1;
-                    temp = list[i];
-
-                    while (n >= 0 && list[n] > temp)
-                    {
-                        list[n + 1] = list[n];
-                        n--;
-                    }
-                    list[n + 1] = temp;
-                }
-            }
-            else if ( _sortAlgorithm == 4) //Heap Sort
-            {
-                var n = list.Count;
-                for (int i = n / 2 - 1; i >= 0; i--)
-                {
-                    Heapify(list, n, i);
-                }
-
-                for (int i = n - 1; i >= 0; i--)
-                {
-                    var temp = list[0];
-                    list[0] = list[i];
-                    list[i] = temp;
-
-                    Heapify(list, i, 0);
                 }
             }
             sorted = list.ToArray();
         }
+
+        public void SortBubble()
+        {
+            var swapped = false;
+            for (int i = 0; i < list.Count - 1; i++)
+            {
+                for (int j = 0; j < list.Count - 1 - i; j++)
+                {
+                    if (list[j] > list[j + 1])
+                    {
+                        var temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
+
+                        swapped = true;
+                    }
+                }
+                if (!swapped) break;
+            }
+            sorted = list.ToArray();
+        }
+
+        public void SortInsertion()
+        {
+            var temp = 0;
+            var n = 0;
+            for (int i = 1; i < list.Count; ++i)
+            {
+                n = i - 1;
+                temp = list[i];
+
+                while (n >= 0 && list[n] > temp)
+                {
+                    list[n + 1] = list[n];
+                    n--;
+                }
+                list[n + 1] = temp;
+            }
+            sorted = list.ToArray();
+        }
+
+        public void SortHeap()
+        {
+            var n = list.Count;
+            for (int i = n / 2 - 1; i >= 0; i--)
+            {
+                Heapify(list, n, i);
+            }
+
+            for (int i = n - 1; i >= 0; i--)
+            {
+                var temp = list[0];
+                list[0] = list[i];
+                list[i] = temp;
+
+                Heapify(list, i, 0);
+            }
+            sorted = list.ToArray();
+        }
+
 
         void Heapify(List<int> _list, int _size, int _index)
         {
@@ -166,11 +170,11 @@ namespace Sortier_Algorithmen
 
         public void Add(int _toAdd, string _shownAs)
         {
-            list.Add(_toAdd); 
-            Sort(rnd.Next(1, 5));
+            list.Add(_toAdd);
+            SortHeap(); //Fastest acording to tests with this program
             if (_shownAs == "increscent") Increscent();
             else if (_shownAs == "decrescent") Decrescent();
-            else if (_shownAs == "zig-zag") ZigZag();
+            else if (_shownAs == "zig-zag'ed") ZigZag();
         }
     }
 }

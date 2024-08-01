@@ -11,6 +11,11 @@
         {
             unsorted = _list.ToArray();
             algorithm = new SortingAlgorithm(_list);
+            //First sorting takes clearly more time, so i load it here first
+            algorithm.SortSequential();
+            algorithm.SortBubble();
+            algorithm.SortInsertion();
+            algorithm.SortHeap();
         }
 
         public override Screen Start()
@@ -18,7 +23,7 @@
             ClearConsole();
 
             Print($"Your List (size: {algorithm.list.Count}):");
-            PrintList(algorithm.list);
+            PrintList(unsorted.ToList());
             GetTextSpacements();
 
             return GetWishedSortMethod();
@@ -27,8 +32,14 @@
         void GetSortingTime(int _sort)
         {
             deltaTime = 0;
+            algorithm.list = unsorted.ToList();
             int time1 = DateTime.Now.Millisecond * 1000 + DateTime.Now.Microsecond;
-            algorithm.Sort(_sort);
+
+            if (_sort == 1) algorithm.SortSequential();
+            else if (_sort == 2) algorithm.SortBubble();
+            else if (_sort == 3) algorithm.SortInsertion();
+            else if (_sort == 4) algorithm.SortHeap();
+
             int time2 = DateTime.Now.Millisecond * 1000 + DateTime.Now.Microsecond;
             deltaTime = time2 - time1;
         }
