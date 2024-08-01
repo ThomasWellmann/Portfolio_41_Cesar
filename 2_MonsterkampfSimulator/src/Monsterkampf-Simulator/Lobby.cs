@@ -38,17 +38,17 @@
             PrintGameTitel();
             GetLobbyInput();
 
-            if (selected == 0)
+            if (selected == 0) //Start game
             {
                 MonsterSettings monsterSettings = new MonsterSettings();
                 return monsterSettings;
             }
-            else if (selected == 1)
+            else if (selected == 1) //How to play
             {
                 HowToPlay howToPlay = new HowToPlay();
                 return howToPlay;
             }
-            else if (selected == 2)
+            else if (selected == 2) //Credits
             {
                 Credits credits = new Credits();
                 return credits;

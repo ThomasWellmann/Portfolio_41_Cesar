@@ -39,23 +39,23 @@
 
         protected static int CenterTextY(int _offSet = 0) { return windowSize[1] / 2 + _offSet; }
 
-        protected static void DrawMiddleLine()
-        {
-            for (int y = 0; y < windowSize[1]; y++)
-            {
-                PrintText("█", ConsoleColor.DarkGray, windowSize[0] / 2, y);
-            }
-            for (int x = 0; x < windowSize[0]; x++)
-            {
-                PrintText("█", ConsoleColor.DarkGray, x, windowSize[1] / 2);
-            }
-        }
-
         protected void ResizeWindow(int _width, int _height)
         {
             Console.SetWindowPosition(0, 0);
             Console.SetBufferSize(_width, 1000);
             Console.SetWindowSize(_width, _height);
         }
+
+        //protected static void DrawMiddleLine() //For testing if centered
+        //{
+        //    for (int y = 0; y < windowSize[1]; y++)
+        //    {
+        //        PrintText("█", ConsoleColor.DarkGray, windowSize[0] / 2, y);
+        //    }
+        //    for (int x = 0; x < windowSize[0]; x++)
+        //    {
+        //        PrintText("█", ConsoleColor.DarkGray, x, windowSize[1] / 2);
+        //    }
+        //}
     }
 }

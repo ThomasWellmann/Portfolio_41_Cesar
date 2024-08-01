@@ -33,17 +33,17 @@
         public int[] Attack(Monster _defender)
         {
             int dmgDelt = 0;
-            if (type == 1)
+            if (type == 1) //Orc
             {
                 dmgDelt = AP - _defender.DP;
                 dmgDelt += (GetCrit(10)) ? AP * 2 : 0;
             }
-            else if (type == 2)
+            else if (type == 2) //Troll
             {
                 dmgDelt = AP - _defender.DP;
                 dmgDelt += (GetCrit(0)) ? AP * 2 : 0;
             }
-            else if (type == 3)
+            else if (type == 3) //Goblin
             {
                 dmgDelt = AP - _defender.DP;
                 dmgDelt += (GetCrit(20)) ? AP * 2 : 0;
@@ -59,7 +59,7 @@
             int crit = rnd.Next(0, 100);
             if (crit < _criticalChance)
             {
-                crited = 1;
+                crited = 1; //int so it can be sent with attackLog[]
                 return true;
             }
             else

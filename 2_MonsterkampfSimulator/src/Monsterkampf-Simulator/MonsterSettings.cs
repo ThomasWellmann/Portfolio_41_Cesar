@@ -89,7 +89,7 @@
             PrintMChangesText();
             while (true)
             {
-                ConsoleKeyInfo key = Console.ReadKey(true);
+                var key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.Enter) GetMValueInput();
                 else if (key.Key == ConsoleKey.Spacebar) break;
                 else if (key.Key == ConsoleKey.Escape) return new MonsterSettings();
@@ -137,12 +137,12 @@
             }
         }
 
-        public static void DisplayVS(bool _stats = false)
+        public static void DisplayVS(bool _stats = false) //Show P1 and P2 monsters and their stats
         {
             SetColors();
             int VSOffset = 0;
             int offSet;
-            if (_stats)
+            if (_stats) //Stats can be hidden
             {
                 VSOffset = 2;
                 for (int i = 1; i < 3; i++)
@@ -171,10 +171,10 @@
         {
             while (true)
             {
-                ConsoleKeyInfo key = Console.ReadKey(true);
+                var key = Console.ReadKey(true);
                 if (key.Key == ConsoleKey.D1)
                 {
-                    if (currentPlayer == 1)
+                    if (currentPlayer == 1) //Orc
                     {
                         Orc = new Monster("Orc", ConsoleColor.DarkGreen, orc[0], orc[1], orc[2], orc[3], orc[4]);
                         monsterPlayer[1] = Orc;
@@ -188,7 +188,7 @@
 
                     break;
                 }
-                else if (key.Key == ConsoleKey.D2)
+                else if (key.Key == ConsoleKey.D2) //Troll
                 {
                     if (currentPlayer == 1)
                     {
@@ -204,7 +204,7 @@
                     
                     break;
                 }
-                else if (key.Key == ConsoleKey.D3)
+                else if (key.Key == ConsoleKey.D3) //Goblin
                 {
                     if (currentPlayer == 1)
                     {
@@ -225,7 +225,7 @@
             return null;
         }
 
-        public static void DisplayPlayer(Monster _monster, bool _stats, int _x, int _y, int _player)
+        public static void DisplayPlayer(Monster _monster, bool _stats, int _x, int _y, int _player) //Show wanted monster
         {
             PrintText(VSText[0][_player - 1], colorPlayer[_player], _x, _y);
             _y++;
@@ -246,7 +246,7 @@
                 _monster.DrawMonster(_x, _y);
             }
         }
-        private void GetMValueInput() // Texteingabe für Monster Werten
+        private void GetMValueInput() //Texteingabe für Monster Werten
         {
             string[] values = { "     ", " HP: ", " AP: ", " DP: ", " AS: " };
             int _x = 0;
@@ -270,21 +270,21 @@
                     {
                         Console.SetCursorPosition(_x + input.Length, valueOffSet);
                         Console.CursorVisible = true;
-                        ConsoleKeyInfo key = Console.ReadKey(true);
-                        if (key.Key == ConsoleKey.Escape) // Eingabe ohne änderung beenden
+                        var key = Console.ReadKey(true);
+                        if (key.Key == ConsoleKey.Escape) //Eingabe ohne änderung beenden
                         {
                             Console.CursorVisible = false;
                             end = true;
-                            SetMValues();
+                            SetAllMValues();
                             DisplayVS(true);
                             break;
                         }
-                        else if (Char.IsDigit(key.KeyChar) == true && input.Length < 3) // Input muss Zahl sein
+                        else if (Char.IsDigit(key.KeyChar) == true && input.Length < 3) //Input muss Zahl sein
                         {
                             input += key.KeyChar;
                             Console.Write(key.KeyChar);
                         }
-                        else if (key.Key == ConsoleKey.Backspace && input.Length > 0) // Letzte Input löschen
+                        else if (key.Key == ConsoleKey.Backspace && input.Length > 0) //Letzte Input löschen
                         {
                             input = input.Remove(input.Length - 1);
 
@@ -292,7 +292,7 @@
                             Console.Write(' ');
                             Console.SetCursorPosition(_x + input.Length, valueOffSet);
                         }
-                        else if (key.Key == ConsoleKey.Enter) // Eingabe bestätigen
+                        else if (key.Key == ConsoleKey.Enter) //Eingabe bestätigen
                         {
                             Console.CursorVisible = false;
                             if (input == "0") input = "1";
@@ -304,7 +304,7 @@
                                 else if (monsterPlayer[p] == Troll) troll[i] = mValue;
                                 else if (monsterPlayer[p] == Goblin) goblin[i] = mValue;
                             }
-                            SetMValues();
+                            SetAllMValues();
                             break;
                         }
                     }
@@ -314,7 +314,7 @@
             }
         }
 
-        private void SetMValues()
+        private void SetAllMValues()
         {
             SetMValues(Orc, orc);
             SetMValues(Troll, troll);

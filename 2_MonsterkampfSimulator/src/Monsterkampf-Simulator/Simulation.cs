@@ -34,7 +34,7 @@
         }
         public override Screen Start()
         {
-            Thread thread = new Thread(SpeedUpBattle);
+            Thread thread = new Thread(SpeedUpBattle); 
 
             x = CenterTextX("") - 20;
             y = CenterTextY(0);
@@ -58,7 +58,7 @@
             }
         }
 
-        private static void SpeedUpBattle()
+        private static void SpeedUpBattle() //Press "space" to end faster
         {
             while (true)
             {
@@ -82,7 +82,7 @@
             PrintText(starterText[(sameAS) ? 0 : 1], defaultFColor, CenterTextX(starterText[(sameAS) ? 0 : 1]), y);
             Thread.Sleep(1000);
             y++;
-            for (int i = 2; i < starterText.GetLength(0); i++)
+            for (int i = 2; i < starterText.GetLength(0); i++) //Countdown
             {
                 Thread.Sleep(1000);
                 PrintText(starterText[i], defaultFColor, CenterTextX(starterText[i]), y + i - 2);
@@ -95,7 +95,7 @@
         {
             while (true)
             {
-                if (roundCount == 21)
+                if (roundCount == 21) //Max:20 rounds; more = draw
                 {
                     draw = true;
                     break;
@@ -105,27 +105,27 @@
                 string[] battleLoopText = { $"Round {roundCount}:", 
                     $"{chosenMonsters[currentPlayer].name} has {((attackLog[2] == 0) ? "" : "criticaly " )}attacked {chosenMonsters[otherPlayer].name}.",
                     $"It did {attackLog[0]} damage and {chosenMonsters[otherPlayer].name} has now {attackLog[1]} HP."};
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 3; i++) //Combat log
                 {
                     PrintText(battleLoopText[i], (i == 0) ? colorPlayer[currentPlayer] : defaultFColor, x, y + i);
                 }
 
-                if (currentPlayer != GetStarter()) roundCount++;
+                if (currentPlayer != GetStarter()) roundCount++; //Every 2nd attack round +1 round
 
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 5; i++) //Space between logs
                 {
                     y++;
                     Console.WriteLine();
                     Thread.Sleep(printSpeed);
                 }
 
-                if (attackLog[1] == 0) break;
+                if (attackLog[1] == 0) break; //Defender HP = 0 -> end battle
                     
                 ChangePlayers();
             }
         }
 
-        private Screen CheckIfCheating()
+        private Screen CheckIfCheating() //If one has more DP than the other AP, he is cheeting
         {
             if (chosenMonsters[1].DP > chosenMonsters[2].AP)
             {
@@ -160,13 +160,13 @@
             if (!draw) PrintText(endGameText[0], winnerColor, CenterTextX(endGameText[0]), y);
             else PrintText(endGameText[1], defaultFColor, CenterTextX(endGameText[1]), y);
 
-            for (int i = 2; i < 4; i++)
+            for (int i = 2; i < 4; i++) //Winner text
             {
                 y++;
                 Thread.Sleep((printSpeed == 100) ? 500 : 5);
                 PrintText(endGameText[i], defaultFColor, CenterTextX(endGameText[i]), y);
             }
-            for (int i = 0; i < windowSize[1] / 2; i++)
+            for (int i = 0; i < windowSize[1] / 2; i++) //Get winner text centered
             {
                 Console.WriteLine();
                 Thread.Sleep((printSpeed == 100) ? 50 : 5);
@@ -194,7 +194,7 @@
             }
         }
 
-        private void ChangePlayers()
+        private void ChangePlayers() //After attack, change attacker
         {
             if (currentPlayer == 1)
             {
